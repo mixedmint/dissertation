@@ -216,3 +216,6 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# FHRS uk
+/0_raw/FHRS_All_en-GB.csv
