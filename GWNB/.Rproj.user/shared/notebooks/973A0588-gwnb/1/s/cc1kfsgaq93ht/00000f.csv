@@ -1,0 +1,6 @@
+"0","coords <- df[, c(""x"", ""y"")]"
+"0","spdf   <- SpatialPointsDataFrame("
+"0","  coords      = coords,"
+"0","  data        = df,"
+"0","  proj4string = CRS(""+init=epsg:27700"")"
+"0",")"

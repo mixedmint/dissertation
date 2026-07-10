@@ -32,14 +32,27 @@ london_df = london_df[~london_df["RatingValue"].isin(invalid_ratings)]
 before_dedup = len(london_df)
 london_df = london_df.drop_duplicates(subset=["FHRSID"])
 
+exclude_types = {
+    "Distributors/Transporters",
+    "Farmers/growers",
+    "Hospitals/Childcare/Caring Premises",
+    "Importers/Exporters",
+    "Manufacturers/packers",
+    "Mobile caterer",
+    "School/college/university",
+}
+before_biztype = len(london_df)
+london_df = london_df[~london_df["BusinessType"].isin(exclude_types)]
+
 output_file = "1_FHRS_London.csv"
 london_df.to_csv(output_file, index=False, encoding="utf-8-sig")
 
 print(f"完成！")
-print(f"  全国总行数:       {len(df):,}")
-print(f"  伦敦筛选行数:     {before_drop:,}")
-print(f"  删除无坐标行数:   {before_drop - len(london_df):,}")
-print(f"  删除重复行数:     {before_dedup - len(london_df):,}")
-print(f"  最终保留行数:     {len(london_df):,}")
-print(f"  覆盖区数:         {london_df['LocalAuthorityName'].nunique()} / 33")
-print(f"  输出文件:         {output_file}")
+print(f"  全国总行数:             {len(df):,}")
+print(f"  伦敦筛选行数:           {before_drop:,}")
+print(f"  删除无坐标行数:         {before_drop - before_dedup:,}")
+print(f"  删除重复行数:           {before_dedup - before_biztype:,}")
+print(f"  删除非餐饮业务类型行数: {before_biztype - len(london_df):,}")
+print(f"  最终保留行数:           {len(london_df):,}")
+print(f"  覆盖区数:               {london_df['LocalAuthorityName'].nunique()} / 33")
+print(f"  输出文件:               {output_file}")

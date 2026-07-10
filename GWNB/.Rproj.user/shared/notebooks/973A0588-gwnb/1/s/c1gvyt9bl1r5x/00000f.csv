@@ -1,0 +1,2 @@
+"0","df$log_restaurant_count <- log(df$restaurant_count)"
+"0","df$log_pop_density      <- log(df$Population_density)"

@@ -1,0 +1,65 @@
+---
+title: "GWNB"
+output: html_document
+date: "2026-07-09"
+---
+```{r}
+library(GWmodel)
+library(MASS)
+library(sp)
+```
+
+1. 读取数据
+```{r}
+df <- read.csv("10_regression_with_coords.csv", fileEncoding = "UTF-8-BOM")
+```
+
+```{r}
+names(df)[names(df) == "X0.4"]   <- "age_0_4"
+names(df)[names(df) == "X65plus"] <- "age_65plus"
+```
+
+log变换
+```{r}
+df$log_restaurant_count <- log(df$restaurant_count)
+df$log_pop_density      <- log(df$Population_density)
+```
+
+删除缺失值
+```{r}
+vars <- c("low_rating_count", "log_restaurant_count", "IMD",
+          "Asian", "Black", "Other",
+          "retailers___other", "takeaway_sandwich_shop",
+          "pub_bar_nightclub", "supermarkets_hypermarkets",
+          "hotel_bed_and_breakfast_guest_house", "other_catering_premises",
+          "log_pop_density", "x", "y")
+df <- df[complete.cases(df[, vars]), ]
+cat("样本量:", nrow(df), "\n")
+```
+
+2. 建立空间对象（BNG, EPSG:27700）
+```{r}
+coords <- df[, c("x", "y")]
+spdf   <- SpatialPointsDataFrame(
+  coords      = coords,
+  data        = df,
+  proj4string = CRS("+init=epsg:27700")
+)
+```
+
+3. 全局 NBR 估计 theta
+```{r}
+formula_str <- low_rating_count ~ IMD +
+  Asian + Black + Other +
+  retailers___other + takeaway_sandwich_shop +
+  pub_bar_nightclub + supermarkets_hypermarkets +
+  hotel_bed_and_breakfast_guest_house + other_catering_premises +
+  log_pop_density +
+  offset(log_restaurant_count)
+
+global_nb <- glm.nb(formula_str, data = df)
+theta     <- global_nb$theta
+cat("全局 NBR theta:", round(theta, 4), "\n")
+cat("全局 NBR AIC:  ", round(AIC(global_nb), 2), "\n\n")
+```
+
