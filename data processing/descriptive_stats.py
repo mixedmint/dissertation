@@ -6,7 +6,7 @@ df = pd.read_csv("data processing/7_regression.csv", encoding="utf-8-sig")
 # ── 变量分组 ──
 var_groups = {
     "IMD": {
-        "IMD": "IMD Decile Mean (1=Most Deprived)",
+        "IMD": "IMD Score, Pop-Weighted (Higher=More Deprived)",
     },
     "Ethnicity (%)": {
         "Asian":            "Asian (%)",

@@ -1,0 +1,6 @@
+﻿Variable,NBR_Coef_Sign,Role,Expected_Direction,Monotonic,Q1,Q5,Q5_minus_Q1
+Takeaway & Sandwich Shops,+,risk,上升,True,13.19,18.84,5.65
+Other Retailers,+,risk,上升,True,23.21,33.79,10.58
+Supermarkets & Hypermarkets,-,protective,下降,False,4.53,4.69,0.16
+Other Catering,-,protective,下降,False,4.61,6.53,1.92
+Hotels & Guesthouses,-,protective,下降,False,1.11,0.92,-0.19

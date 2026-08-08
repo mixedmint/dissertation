@@ -8,21 +8,24 @@ import matplotlib.patches as mpatches
 from matplotlib.patches import Polygon as MplPolygon
 
 # ── 读取数据 ──
-imd  = pd.read_csv("data processing/2_IMD_MSOA_London.csv", encoding="utf-8-sig")
+imd  = pd.read_csv("data processing/2b_IMD_Score_MSOA_London.csv", encoding="utf-8-sig")
 msoa = gpd.read_file("0_raw/2021 London MSOA/2021_London_MSOA.shp")[["MSOA21CD", "geometry"]]
 gdf  = msoa.merge(imd, on="MSOA21CD", how="left")
 
-# ── 分级（5 类，等距）──
-bins   = [1, 3, 5, 7, 9, 10.01]
-labels = ["1.0–3.0  (Most Deprived)",
-          "3.0–5.0",
-          "5.0–7.0",
-          "7.0–9.0",
-          "9.0–10.0  (Least Deprived)"]
-colors = ["#084594", "#2171b5", "#6baed6", "#bdd7e7", "#eff3ff"]
+# ── 分级（5 分位数；IMD Score 越高＝越贫困）──
+edges = gdf["IMD_Score_PopWeighted"].quantile([0, .2, .4, .6, .8, 1.0]).values
+edges[0]  -= 0.01
+edges[-1] += 0.01
 
-gdf["IMD_class"] = pd.cut(gdf["IMD_Decile_Mean"], bins=bins,
-                           labels=labels, right=False)
+labels = []
+for i in range(5):
+    lo, hi = edges[i], edges[i + 1]
+    tag = "  (Least Deprived)" if i == 0 else "  (Most Deprived)" if i == 4 else ""
+    labels.append(f"{lo:.1f}–{hi:.1f}{tag}")
+colors = ["#eff3ff", "#bdd7e7", "#6baed6", "#2171b5", "#084594"]
+
+gdf["IMD_class"] = pd.cut(gdf["IMD_Score_PopWeighted"], bins=edges,
+                           labels=labels, include_lowest=True)
 
 # ══════════════════════════════════════════
 # 比例尺 & 指北针
@@ -73,9 +76,9 @@ for label, color in zip(labels, colors):
 legend_patches = [mpatches.Patch(color=c, label=l)
                   for c, l in zip(colors, labels)]
 ax.legend(handles=legend_patches, loc="lower right", fontsize=9,
-          title="IMD Decile Mean", title_fontsize=9, framealpha=0.9)
+          title="IMD Score", title_fontsize=9, framealpha=0.9)
 
-ax.set_title("Index of Multiple Deprivation (IMD) by MSOA",
+ax.set_title("IMD Score by MSOA",
              fontsize=14, fontweight="bold", pad=10)
 
 ax.axis("off")

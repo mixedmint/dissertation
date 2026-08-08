@@ -70,7 +70,7 @@ global_df = pd.DataFrame({
     "p_value":  ols.pvalues.values.round(4),
     "Sig":      [stars(p) for p in ols.pvalues],
 })
-global_df.to_csv("NBR/10_gwr_global_coefs.csv", index=False, encoding="utf-8-sig")
+global_df.to_csv("NBR/gwr/10_gwr_global_coefs.csv", index=False, encoding="utf-8-sig")
 
 # ── 模型指标 ──
 metrics = pd.DataFrame([{
@@ -81,7 +81,7 @@ metrics = pd.DataFrame([{
     "AIC":        round(result.aic, 4),
     "BIC":        round(result.bic, 4),
 }])
-metrics.to_csv("NBR/10_gwr_metrics.csv", index=False, encoding="utf-8-sig")
+metrics.to_csv("NBR/gwr/10_gwr_metrics.csv", index=False, encoding="utf-8-sig")
 
 # ── 局部系数 ──
 coef_cols = ["Intercept"] + x_cols
@@ -89,11 +89,11 @@ coef_df = pd.DataFrame(result.params, columns=coef_cols)
 coef_df.insert(0, "MSOA21CD", df_clean["MSOA21CD"].values)
 coef_df["local_R2"] = result.localR2
 coef_df["y_pred"]   = result.predy.flatten()
-coef_df.to_csv("NBR/10_gwr_local_coefs.csv", index=False, encoding="utf-8-sig")
+coef_df.to_csv("NBR/gwr/10_gwr_local_coefs.csv", index=False, encoding="utf-8-sig")
 
 print("\n── 模型指标 ──")
 print(metrics.to_string(index=False))
 print("\n结果已保存：")
-print("  NBR/10_gwr_global_coefs.csv（全局系数）")
-print("  NBR/10_gwr_metrics.csv（模型指标）")
-print("  NBR/10_gwr_local_coefs.csv（局部系数）")
+print("  NBR/gwr/10_gwr_global_coefs.csv（全局系数）")
+print("  NBR/gwr/10_gwr_metrics.csv（模型指标）")
+print("  NBR/gwr/10_gwr_local_coefs.csv（局部系数）")

@@ -1,0 +1,11 @@
+﻿Group,Variable,N,Mean,SD,Min,Q1,Median,Q3,Max,Note
+IMD,"IMD Score, Pop-Weighted (Higher=More Deprived)",1002,22.17,10.28,2.21,14.16,22.05,29.32,57.22,
+Ethnicity (%),Asian (%),1002,19.92,15.48,1.73,9.24,14.31,24.23,78.75,
+Ethnicity (%),Other (%),1002,6.26,3.58,0.4,3.66,5.46,8.16,25.76,
+Population Density,Population Density (persons/km²),1002,8885.16,4949.93,302.3,5063.85,7982.5,12078.6,23873.4,Log-transformed prior to inclusion in NBR models to address right-skewness
+Business Type (%),Other Retailers (%),1002,28.32,12.43,0.0,20.0,26.98,35.29,100.0,
+Business Type (%),Takeaway & Sandwich Shops (%),1002,16.1,9.88,0.0,8.77,15.15,22.22,57.14,
+Business Type (%),"Pubs, Bars & Nightclubs (%)",1002,7.06,6.93,0.0,2.38,5.78,10.0,83.33,
+Business Type (%),Other Catering Premises (%),1002,5.43,6.67,0.0,0.0,3.68,7.98,50.0,
+Business Type (%),Supermarkets & Hypermarkets (%),1002,4.75,5.6,0.0,0.0,3.57,6.22,42.86,
+Business Type (%),Hotels & Guesthouses (%),1002,1.26,3.11,0.0,0.0,0.0,1.32,33.33,
