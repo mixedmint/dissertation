@@ -5,10 +5,10 @@ from libpysal.weights import Queen
 from esda.moran import Moran
 
 # ── 1. 读取局部系数 ──
-local = pd.read_csv("GWNBR_noblack/11_gwnbr_local_coefs.csv", encoding="utf-8-sig")
+local = pd.read_csv("GWNBR/11_gwnbr_local_coefs.csv", encoding="utf-8-sig")
 
 # ── 2. 读取原始数据（与 R 脚本相同的预处理）──
-df = pd.read_csv("GWNBR_noblack/10_regression_with_coords.csv", encoding="utf-8-sig")
+df = pd.read_csv("GWNBR/10_regression_with_coords.csv", encoding="utf-8-sig")
 df = df.rename(columns={"0-4": "age_0_4", "65plus": "age_65plus"})
 df["log_restaurant_count"] = np.log(df["restaurant_count"])
 df["log_pop_density"]      = np.log(df["Population_density"])
@@ -94,5 +94,5 @@ out = pd.DataFrame([{
     "z_score": round(mi.z_norm, 4),
     "p_value": round(mi.p_norm, 4),
 }])
-out.to_csv("GWNBR_noblack/17_gwnbr_morans_i.csv", index=False, encoding="utf-8-sig")
-print("\n结果已保存：GWNBR_noblack/17_gwnbr_morans_i.csv")
+out.to_csv("GWNBR/17_gwnbr_morans_i.csv", index=False, encoding="utf-8-sig")
+print("\n结果已保存：GWNBR/17_gwnbr_morans_i.csv")

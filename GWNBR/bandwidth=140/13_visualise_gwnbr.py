@@ -9,8 +9,8 @@ from matplotlib.colors import TwoSlopeNorm
 from matplotlib.patches import Polygon
 
 # ── 读取数据 ──
-coefs = pd.read_csv("GWNBR_noblack/bandwidth=140/11_gwnbr_local_coefs.csv")
-se    = pd.read_csv("GWNBR_noblack/bandwidth=140/11_gwnbr_local_se.csv")
+coefs = pd.read_csv("GWNBR/bandwidth=140/11_gwnbr_local_coefs.csv")
+se    = pd.read_csv("GWNBR/bandwidth=140/11_gwnbr_local_se.csv")
 
 merged = coefs[["MSOA21CD", "IMD"]].merge(
     se[["MSOA21CD", "IMD"]].rename(columns={"IMD": "IMD_se"}), on="MSOA21CD"
@@ -23,7 +23,7 @@ gdf  = msoa.merge(merged, on="MSOA21CD")
 n_sig = int(gdf["significant"].sum())
 n_total = len(gdf)
 
-bw = pd.read_csv("GWNBR_noblack/bandwidth=140/11_gwnbr_bandwidth.csv")
+bw = pd.read_csv("GWNBR/bandwidth=140/11_gwnbr_bandwidth.csv")
 bandwidth = bw["bandwidth"].iloc[0]
 
 # ══════════════════════════════
@@ -95,9 +95,9 @@ ax.text(0.5, 1.02, f"Bandwidth = {bandwidth:.0f},  n = {n_total:,} MSOAs", trans
 ax.axis("off")
 add_scalebar(ax)
 add_north_arrow(ax)
-plt.savefig("GWNBR_noblack/bandwidth=140/13_imd_local_coef.png", dpi=200, bbox_inches="tight")
+plt.savefig("GWNBR/bandwidth=140/13_imd_local_coef.png", dpi=200, bbox_inches="tight")
 plt.close()
-print("图1已保存：GWNBR_noblack/bandwidth=140/13_imd_local_coef.png")
+print("图1已保存：GWNBR/bandwidth=140/13_imd_local_coef.png")
 
 # ════════════════════════════════════════════════
 # 图2：显著性（二分类）
@@ -119,9 +119,9 @@ ax.axis("off")
 add_scalebar(ax)
 add_north_arrow(ax)
 plt.tight_layout()
-plt.savefig("GWNBR_noblack/bandwidth=140/13_imd_significance.png", dpi=200, bbox_inches="tight")
+plt.savefig("GWNBR/bandwidth=140/13_imd_significance.png", dpi=200, bbox_inches="tight")
 plt.close()
-print("图2已保存：GWNBR_noblack/bandwidth=140/13_imd_significance.png")
+print("图2已保存：GWNBR/bandwidth=140/13_imd_significance.png")
 
 # ════════════════════════════════════════════════
 # 图3：显著区域系数强度（动态分级，自动适应系数正负号与量级）
@@ -159,6 +159,6 @@ ax.axis("off")
 add_scalebar(ax)
 add_north_arrow(ax)
 plt.tight_layout()
-plt.savefig("GWNBR_noblack/bandwidth=140/13_imd_coef_significant_only.png", dpi=200, bbox_inches="tight")
+plt.savefig("GWNBR/bandwidth=140/13_imd_coef_significant_only.png", dpi=200, bbox_inches="tight")
 plt.close()
-print("图3已保存：GWNBR_noblack/bandwidth=140/13_imd_coef_significant_only.png")
+print("图3已保存：GWNBR/bandwidth=140/13_imd_coef_significant_only.png")

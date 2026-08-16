@@ -18,9 +18,9 @@ if no_coord:
     print(f"警告：{no_coord} 个 MSOA 未匹配到坐标，将被删除")
     df = df.dropna(subset=["x", "y"])
 
-df.to_csv("GWNBR_noblack/bandwidth=140/10_regression_with_coords.csv", index=False, encoding="utf-8-sig")
+df.to_csv("GWNBR/bandwidth=140/10_regression_with_coords.csv", index=False, encoding="utf-8-sig")
 
 print("完成！")
 print(f"  输出行数: {len(df):,}")
-print(f"  输出文件: GWNBR_noblack/bandwidth=140/10_regression_with_coords.csv")
+print(f"  输出文件: GWNBR/bandwidth=140/10_regression_with_coords.csv")
 print(f"  列数:     {len(df.columns)}（含 x, y 坐标）")

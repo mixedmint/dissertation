@@ -11,9 +11,9 @@ from matplotlib.patches import Polygon as MplPolygon
 # 三张图共用同一套色阶（按三者显著系数的共同范围定），才能直接比较颜色深浅；
 # 不显著区域统一灰色。
 BANDWIDTH_DIRS = {
-    140: "GWNBR_noblack/bandwidth=140",
-    186: "GWNBR_noblack",
-    240: "GWNBR_noblack/bandwidth=240",
+    140: "GWNBR/bandwidth=140",
+    186: "GWNBR",
+    240: "GWNBR/bandwidth=240",
 }
 
 msoa_geo = gpd.read_file("0_raw/2021 London MSOA/2021_London_MSOA.shp")[["MSOA21CD", "geometry"]]
@@ -106,6 +106,6 @@ cbar.ax.tick_params(labelsize=8)
 fig.suptitle("Local IMD Coefficient in Significant Areas Across Bandwidths",
              fontsize=16, fontweight="bold", y=0.97)
 
-plt.savefig("GWNBR_noblack/14_imd_coef_significant_only_bandwidth_compare.png", dpi=200, bbox_inches="tight")
+plt.savefig("GWNBR/14_imd_coef_significant_only_bandwidth_compare.png", dpi=200, bbox_inches="tight")
 plt.close()
-print("完成！已保存：GWNBR_noblack/14_imd_coef_significant_only_bandwidth_compare.png")
+print("完成！已保存：GWNBR/14_imd_coef_significant_only_bandwidth_compare.png")

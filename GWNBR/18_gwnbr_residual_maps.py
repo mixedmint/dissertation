@@ -88,9 +88,9 @@ print(f"NBR（无 Black）残差 Moran's I = {nbr_mi_local.I:.4f}  p={nbr_mi_loc
 # ══════════════════════════════════════════════════════
 # 2. 计算 GWNBR Pearson 残差（局部系数 × 原始数据）
 # ══════════════════════════════════════════════════════
-local = pd.read_csv("GWNBR_noblack/11_gwnbr_local_coefs.csv", encoding="utf-8-sig")
+local = pd.read_csv("GWNBR/11_gwnbr_local_coefs.csv", encoding="utf-8-sig")
 
-df_gw = pd.read_csv("GWNBR_noblack/10_regression_with_coords.csv", encoding="utf-8-sig")
+df_gw = pd.read_csv("GWNBR/10_regression_with_coords.csv", encoding="utf-8-sig")
 df_gw["log_restaurant_count"] = np.log(df_gw["restaurant_count"])
 df_gw["log_pop_density"]      = np.log(df_gw["Population_density"])
 
@@ -145,7 +145,7 @@ gdf["abs_resid_gw"] = gdf["resid_gw"].abs()
 def fmt_p(p):
     return "p < 0.001" if p < 0.001 else f"p = {p:.4f}"
 
-gwnbr_mi = pd.read_csv("GWNBR_noblack/17_gwnbr_morans_i.csv", encoding="utf-8-sig").iloc[0]
+gwnbr_mi = pd.read_csv("GWNBR/17_gwnbr_morans_i.csv", encoding="utf-8-sig").iloc[0]
 
 # ══════════════════════════════════════════════════════
 # 图1：NBR vs GWNBR 残差并排（共享色阶）
@@ -185,9 +185,9 @@ cbar.ax.tick_params(labelsize=8)
 fig.suptitle("Pearson Residuals of Global NBR Model and GWNBR Model",
              fontsize=14, fontweight="bold", y=0.97)
 
-plt.savefig("GWNBR_noblack/18_residual_comparison.png", dpi=200, bbox_inches="tight")
+plt.savefig("GWNBR/18_residual_comparison.png", dpi=200, bbox_inches="tight")
 plt.close()
-print("图1已保存：GWNBR_noblack/18_residual_comparison.png")
+print("图1已保存：GWNBR/18_residual_comparison.png")
 
 # ══════════════════════════════════════════════════════
 # 图2：GWNBR 局部拟合优度（|残差|，越小越好）
@@ -222,6 +222,6 @@ ax2.axis("off")
 add_scalebar(ax2)
 add_north_arrow(ax2)
 plt.tight_layout()
-plt.savefig("GWNBR_noblack/18_local_fit_quality.png", dpi=200, bbox_inches="tight")
+plt.savefig("GWNBR/18_local_fit_quality.png", dpi=200, bbox_inches="tight")
 plt.close()
-print("图2已保存：GWNBR_noblack/18_local_fit_quality.png")
+print("图2已保存：GWNBR/18_local_fit_quality.png")

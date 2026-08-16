@@ -1,8 +1,8 @@
 import pandas as pd
 
 # ── 识别 GWNBR 主模型（h=186, 无Black）里 IMD 局部系数显著为负的 MSOA ──
-coefs = pd.read_csv("GWNBR_noblack/11_gwnbr_local_coefs.csv")
-se    = pd.read_csv("GWNBR_noblack/11_gwnbr_local_se.csv")[["MSOA21CD", "IMD"]].rename(columns={"IMD": "IMD_se"})
+coefs = pd.read_csv("GWNBR/11_gwnbr_local_coefs.csv")
+se    = pd.read_csv("GWNBR/11_gwnbr_local_se.csv")[["MSOA21CD", "IMD"]].rename(columns={"IMD": "IMD_se"})
 
 m = coefs[["MSOA21CD", "MSOA21NM", "IMD"]].merge(se, on="MSOA21CD")
 m["t"] = m["IMD"] / m["IMD_se"]

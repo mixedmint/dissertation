@@ -35,8 +35,8 @@ print(df["local_imd_var"].describe().round(4))
 sub.round(4).to_csv("discussion/5.4 negative/3_local_imd_variance.csv", encoding="utf-8-sig")
 
 # ── 局部系数标准误（精度）──
-coefs = pd.read_csv("GWNBR_noblack/11_gwnbr_local_coefs.csv")[["MSOA21CD", "MSOA21NM"]]
-se = pd.read_csv("GWNBR_noblack/11_gwnbr_local_se.csv").merge(coefs, on="MSOA21CD")
+coefs = pd.read_csv("GWNBR/11_gwnbr_local_coefs.csv")[["MSOA21CD", "MSOA21NM"]]
+se = pd.read_csv("GWNBR/11_gwnbr_local_se.csv").merge(coefs, on="MSOA21CD")
 se_sub = se[se["MSOA21NM"].isin(targets)][["MSOA21NM", "IMD"]].set_index("MSOA21NM").loc[targets]
 se_sub.columns = ["IMD_local_SE"]
 se_sub["IMD_local_variance_SE2"] = se_sub["IMD_local_SE"] ** 2

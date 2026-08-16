@@ -9,9 +9,9 @@ from matplotlib.patches import Polygon as MplPolygon
 
 # ── 把三个带宽（140/186/240）的 Local IMD Coefficient 图拼成一张（上二下一）──
 BANDWIDTH_DIRS = {
-    140: "GWNBR_noblack/bandwidth=140",
-    186: "GWNBR_noblack",
-    240: "GWNBR_noblack/bandwidth=240",
+    140: "GWNBR/bandwidth=140",
+    186: "GWNBR",
+    240: "GWNBR/bandwidth=240",
 }
 
 msoa_geo = gpd.read_file("0_raw/2021 London MSOA/2021_London_MSOA.shp")[["MSOA21CD", "geometry"]]
@@ -95,6 +95,6 @@ cbar.ax.tick_params(labelsize=8)
 fig.suptitle("Spatial Variation in Local IMD Coefficient Across Bandwidths",
              fontsize=16, fontweight="bold", y=0.96)
 
-plt.savefig("GWNBR_noblack/14_imd_local_coef_bandwidth_compare.png", dpi=200, bbox_inches="tight")
+plt.savefig("GWNBR/14_imd_local_coef_bandwidth_compare.png", dpi=200, bbox_inches="tight")
 plt.close()
-print("完成！已保存：GWNBR_noblack/14_imd_local_coef_bandwidth_compare.png")
+print("完成！已保存：GWNBR/14_imd_local_coef_bandwidth_compare.png")

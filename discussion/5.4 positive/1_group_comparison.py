@@ -3,8 +3,8 @@ import pandas as pd
 # ── 为什么 GWNBR 里中南、西部 IMD 局部系数显著为正：业态构成机制的分组验证 ──
 # A 组：局部 IMD 系数显著为正的 MSOA（中南、西部那批聚集区，约314个）
 # B 组：其余 MSOA（不显著 + 北部显著为负的6个）
-coefs = pd.read_csv("GWNBR_noblack/11_gwnbr_local_coefs.csv")[["MSOA21CD", "MSOA21NM", "IMD"]]
-se = pd.read_csv("GWNBR_noblack/11_gwnbr_local_se.csv")[["MSOA21CD", "IMD"]].rename(columns={"IMD": "IMD_se"})
+coefs = pd.read_csv("GWNBR/11_gwnbr_local_coefs.csv")[["MSOA21CD", "MSOA21NM", "IMD"]]
+se = pd.read_csv("GWNBR/11_gwnbr_local_se.csv")[["MSOA21CD", "IMD"]].rename(columns={"IMD": "IMD_se"})
 m = coefs.merge(se, on="MSOA21CD")
 m["t"] = m["IMD"] / m["IMD_se"]
 m["group"] = "B"
@@ -21,7 +21,8 @@ print()
 # ══════════════════════════════════════════════════════
 # 层次一：两组业态构成对比（背景层，较弱证据）
 # ══════════════════════════════════════════════════════
-biz_check = ["takeaway_sandwich_shop", "retailers___other", "supermarkets_hypermarkets", "restaurant_cafe_canteen"]
+biz_check = ["takeaway_sandwich_shop", "retailers___other", "supermarkets_hypermarkets",
+             "restaurant_cafe_canteen", "hotel_bed_and_breakfast_guest_house", "other_catering_premises"]
 tier1 = df.groupby("group")[biz_check + ["IMD"]].mean().round(2).T
 tier1["A_minus_B"] = (tier1["A"] - tier1["B"]).round(2)
 
