@@ -1,0 +1,2 @@
+﻿Model,Weight_Type,Moran_I,E_I,z_score,p_value
+GWNBR,Gravity (w_ij = 1/d_ij^1),0.0051,-0.001,4.1751,0.0
